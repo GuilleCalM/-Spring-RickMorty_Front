@@ -1,0 +1,44 @@
+<div class="modal pt-5" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true" *ngIf="selectedCharacter">
+    <div class="modal-dialog">
+      <div class="modal-content mt-5">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataModalLabel">{{ selectedCharacter && selectedCharacter.name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="selectedCharacter=null">
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr>
+              <th>Status</th>
+              <td>{{ selectedCharacter && selectedCharacter.status }}</td>
+            </tr>
+            <tr>
+              <th>Especie</th>
+              <td>{{ selectedCharacter && selectedCharacter.species }}</td>
+            </tr>
+            <tr>
+              <th>Género</th>
+              <td>{{ selectedCharacter && selectedCharacter.gender }}</td>
+            </tr>
+            <tr>
+              <th>Tipo</th>
+              <td>{{ selectedCharacter && (selectedCharacter.type=='')? "No type": selectedCharacter.type }}</td>
+            </tr>
+            <tr>
+              <th>Origen</th>
+              <td>{{ selectedCharacter && selectedCharacter.origin.name }}</td>
+            </tr>
+            <tr>
+              <th>Última locación </th>
+              <td>{{ selectedCharacter && selectedCharacter.location.name }}</td>
+            </tr>
+            <tr>
+              <th># Apariciones </th>
+              <td>{{ countEpisodeAppearances() }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+  

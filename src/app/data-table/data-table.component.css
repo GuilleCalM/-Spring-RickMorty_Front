@@ -1,0 +1,10 @@
+.modal {
+  background-color: rgba(53, 51, 51, 0.5);
+  display: block;
+}
+
+.modal-content {
+  background-color: #483491;
+  border: 1px solid rgba(209, 5, 5, 0.2);
+  border-radius: 0.6rem;
+}

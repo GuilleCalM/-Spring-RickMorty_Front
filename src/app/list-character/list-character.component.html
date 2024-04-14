@@ -1,0 +1,62 @@
+<app-title></app-title>
+<div class="container-fluid bg-dark text-light">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+    @if (ApiResponse && ApiResponse.results && ApiResponse.results.length === 0) {
+    <div class="col">
+      <p>No se encontraron personajes.</p>
+    </div>
+    }@else { @for (character of ApiResponse?.results; track character.id) {
+    <div class="col mb-3">
+      <div class="card h-100 bg-dark-gray text-white" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dataModal" (click)="openModal(character)">
+        <div class="row no-gutters">
+          <div class="col-md-4 h-100">
+            <img
+              [src]="character.image"
+              alt="{{ character.name }}"
+              class="card-img h-100" style="object-fit: cover;"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">{{ character.name }}</h2>
+              <p class="card-text text-wrap">
+                <span class="status-dot status-{{ character.status | lowercase }}"></span>
+                {{ character.status }} - {{ character.species }}
+              </p>
+              <p class="card-text text-wrap">
+                <span class="gray-text">Última ubicación conocida:<br></span>
+                <span class="orange-text">{{ character.location.name }}</span>
+              </p>
+              <p class="card-text text-wrap">
+                <span class="gray-text">Primera aparición en:<br></span>
+                <span>{{ character.origin.name }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    } }
+  </div>
+  <app-data-table *ngIf="selectedCharacter" [selectedCharacter]="selectedCharacter"></app-data-table>
+  <br>
+  @if (search.name || search.status || search.species || search.type || search.gender) {
+    <div class="text-center mb-5">
+      <button class="btn btn-primary btn-lg mx-2" *ngIf="ApiResponse && ApiResponse.info && currentPage > 1" 
+        (click)="getFilteredCharacters(search,getPageNumber(ApiResponse.info.prev))">Anterior</button>
+      <button class="btn btn-primary btn-lg mx-2">{{ currentPage }}</button>
+      <button class="btn btn-primary btn-lg mx-2" *ngIf="ApiResponse && ApiResponse.info && currentPage<ApiResponse.info.pages" 
+        (click)="getFilteredCharacters(search,getPageNumber(ApiResponse.info.next))">Siguiente</button>
+    </div>
+  } @else {
+    <div class="text-center mb-5">
+      <button class="btn btn-primary btn-lg mx-2" *ngIf="ApiResponse && ApiResponse.info && currentPage > 1" 
+        (click)="getAllCharacters(getPageNumber(ApiResponse.info.prev))">Anterior</button>
+      <button class="btn btn-primary btn-lg mx-2">{{ currentPage }}</button>
+      <button class="btn btn-primary btn-lg mx-2" *ngIf="ApiResponse && ApiResponse.info && currentPage<ApiResponse.info.pages" 
+        (click)="getAllCharacters(getPageNumber(ApiResponse.info.next))">Siguiente</button>
+    </div>
+  }
+    
+</div>
+

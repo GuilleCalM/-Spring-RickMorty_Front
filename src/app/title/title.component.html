@@ -1,0 +1,27 @@
+<div class="text-white text-center mb-3">
+  <h1>Rick & Morty -Personajes-</h1>
+  <p>Por favor, selecciona un personaje para ver sus detalles...</p>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="col-2">
+      <h5>O búscalo aquí:</h5>
+    </div>
+    <div class="col-1 mx-1">
+      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="search.name" />
+    </div>
+    <div class="col-1 mx-1">
+      <input type="text" class="form-control" placeholder="Status" [(ngModel)]="search.status" />
+    </div>
+    <div class="col-1 mx-1">
+      <input type="text" class="form-control" placeholder="Species" [(ngModel)]="search.species" />
+    </div>
+    <div class="col-1 mx-1">
+      <input type="text" class="form-control" placeholder="Type" [(ngModel)]="search.type" />
+    </div>
+    <div class="col-1 mx-1">
+      <input type="text" class="form-control" placeholder="Gender" [(ngModel)]="search.gender" />
+    </div>
+    <div class="col-1">
+      <button class="btn btn-primary" (click)="searchCharacter()">Buscar</button>
+    </div>
+  </div>  
+</div>
