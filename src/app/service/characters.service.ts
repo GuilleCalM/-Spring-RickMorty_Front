@@ -56,10 +56,10 @@ export class CharacterService {
       catchError(error => {
         if (error.status === 500) {
           console.error('Error 500: Internal Server Error (No se encontro personaje)');
-          return of({ results: [], info: {count: 0, pages: 0, next: '', prev: ''}  } as ApiResponse);
+          return of({ results: [], info: {count: 0, pages: 0, next: '', prev: ''}} as ApiResponse);
         } else {
           console.error('Error HTTP:', error);
-          return of({ results: [], info: {count: 0, pages: 0, next: '', prev: ''}  } as ApiResponse);
+          return of({ results: [], info: {count: 0, pages: 0, next: '', prev: ''}} as ApiResponse);
         }
       })
     );
