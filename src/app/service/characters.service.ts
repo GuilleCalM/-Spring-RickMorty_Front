@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Characters, Origin, Location, ApiResponse } from '../characters.interface';
+import { Observable, catchError, of } from 'rxjs';
+import { Characters, ApiResponse } from '../characters.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +52,16 @@ export class CharacterService {
       params = params.append('page', page.toString());
     }
   
-    return this.http.get<ApiResponse>(`${this.apiUrl}/filter`, { params });
+    return this.http.get<ApiResponse>(`${this.apiUrl}/filter`, { params }).pipe(
+      catchError(error => {
+        if (error.status === 500) {
+          console.error('Error 500: Internal Server Error (No se encontro personaje)');
+          return of({ results: [], info: {count: 0, pages: 0, next: '', prev: ''}  } as ApiResponse);
+        } else {
+          console.error('Error HTTP:', error);
+          return of({ results: [], info: {count: 0, pages: 0, next: '', prev: ''}  } as ApiResponse);
+        }
+      })
+    );
   }
 }
